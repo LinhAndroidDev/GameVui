@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/GameVui/app/src/main/res/drawable-v24/checkdrawable.xml" value="0.1605" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/GameVui/app/src/main/res/drawable-v24/set_checked.xml" value="0.144" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/GameVui/app/src/main/res/drawable/vien.xml" value="0.144" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/GameVui/app/src/main/res/layout/activity_caro.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/GameVui/app/src/main/res/layout/activity_dice.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/GameVui/app/src/main/res/layout/activity_gameduaxe.xml" value="0.264" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/GameVui/app/src/main/res/layout/activity_intro_caro.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/GameVui/app/src/main/res/layout/activity_intro_dice.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/GameVui/app/src/main/res/layout/activity_intro_race.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/GameVui/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/GameVui/app/src/main/res/layout/activity_second.xml" value="0.25" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/GameVui/app/src/main/res/menu/reset.xml" value="0.25416666666666665" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

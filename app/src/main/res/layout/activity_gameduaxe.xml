@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/hoanghon"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/chuong"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="20dp"
+        android:background="@drawable/chuong"/>
+
+    <ImageButton
+        android:id="@+id/change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/restart"
+        />
+
+    <CheckBox
+        android:id="@+id/checkbox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imagebutton"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="40dp"
+        android:button="@null"
+        android:drawableTop="@drawable/set_checked"
+        android:padding="10dp" />
+
+    <CheckBox
+        android:id="@+id/checkbox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkbox1"
+        android:layout_marginBottom="40dp"
+        android:button="@null"
+        android:drawableTop="@drawable/set_checked"
+        android:padding="10dp" />
+
+    <CheckBox
+        android:id="@+id/checkbox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkbox2"
+        android:layout_marginBottom="10dp"
+        android:button="@null"
+        android:drawableTop="@drawable/set_checked"
+        android:padding="10dp" />
+
+    <SeekBar
+        android:id="@+id/seebar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imagebutton"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="30dp"
+        android:layout_toRightOf="@+id/checkbox1"
+        android:thumb="@drawable/car1" />
+
+    <SeekBar
+        android:id="@+id/cay1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imagebutton"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_toRightOf="@+id/checkbox1"
+        android:thumb="@drawable/cay1" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@id/cay1"
+        android:layout_toRightOf="@id/checkbox1"
+        android:background="@drawable/raceroad" />
+
+    <SeekBar
+        android:id="@+id/seebar2"
+        android:layout_above="@+id/road2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkbox1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/checkbox2"
+        android:thumb="@drawable/car2" />
+
+    <SeekBar
+        android:id="@+id/cay2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkbox1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_toRightOf="@id/checkbox2"
+        android:paddingBottom="1dp"
+        android:thumb="@drawable/cay2" />
+
+    <ImageView
+        android:id="@+id/road2"
+        android:layout_below="@+id/cay2"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_toRightOf="@id/checkbox2"
+        android:background="@drawable/raceroad" />
+
+    <SeekBar
+        android:id="@+id/seebar3"
+        android:layout_above="@+id/road3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkbox2"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_toRightOf="@+id/checkbox1"
+        android:thumb="@drawable/car3" />
+
+    <SeekBar
+        android:id="@+id/cay3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkbox2"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_toRightOf="@+id/checkbox1"
+        android:thumb="@drawable/cay3" />
+
+    <ImageView
+        android:id="@+id/road3"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@id/cay3"
+        android:layout_toRightOf="@id/checkbox3"
+        android:background="@drawable/raceroad" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40sp"
+        android:text="100"
+        android:textColor="#FFEB3B"
+        android:textSize="70sp"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/imagebutton"
+        android:layout_width="90sp"
+        android:layout_height="90sp"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/tng" />
+
+    <ImageView
+        android:id="@+id/winlose"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/imagebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+</RelativeLayout>
