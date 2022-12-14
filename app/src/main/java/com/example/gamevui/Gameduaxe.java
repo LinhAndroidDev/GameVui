@@ -2,6 +2,7 @@ package com.example.gamevui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -25,6 +27,7 @@ import android.widget.Toast;
 import java.util.Random;
 
 public class Gameduaxe extends AppCompatActivity {
+    Toolbar toolbarGameDuaXe;
     TextView textView;
     CheckBox cb1,cb2,cb3;
     SeekBar sb1,sb2,sb3,cay1,cay2,cay3;
@@ -33,13 +36,21 @@ public class Gameduaxe extends AppCompatActivity {
     PopupMenu popupMenu;
     int sodiem=100;
     int x=0;
+
+    @Override
+    protected void onResume() {
+        Animation lacchuong=AnimationUtils.loadAnimation(this,R.anim.lacchuong_race);
+        chuong.startAnimation(lacchuong);
+        super.onResume();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameduaxe);
-        textView=findViewById(R.id.textView);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Khaibao();
+        ActionBar();
 
         MediaPlayer mediaPlayer=MediaPlayer.create(this,R.raw.tienggameduaxe_race);
         MediaPlayer dragonBall=MediaPlayer.create(this,R.raw.songoku_race);
@@ -48,33 +59,6 @@ public class Gameduaxe extends AppCompatActivity {
         MediaPlayer mediaPlayer2=MediaPlayer.create(this,R.raw.lose_race);
         Animation smalltobig= AnimationUtils.loadAnimation(this,R.anim.smalltobig_race);
         Animation animation_score=AnimationUtils.loadAnimation(this,R.anim.animation_score_race);
-        Animation lacchuong=AnimationUtils.loadAnimation(this,R.anim.lacchuong_race);
-
-        cb1=findViewById(R.id.checkbox1);
-        cb2=findViewById(R.id.checkbox2);
-        cb3=findViewById(R.id.checkbox3);
-        sb1=findViewById(R.id.seebar1);
-        sb2=findViewById(R.id.seebar2);
-        sb3=findViewById(R.id.seebar3);
-        cay1=findViewById(R.id.cay1);
-        cay2=findViewById(R.id.cay2);
-        cay3=findViewById(R.id.cay3);
-        imb=findViewById(R.id.imagebutton);
-        reset=findViewById(R.id.change);
-        chuong=findViewById(R.id.chuong);
-        winlose=findViewById(R.id.winlose);
-
-        CountDownTimer start=new CountDownTimer(500,500) {
-            @Override
-            public void onTick(long l) {
-
-            }
-
-            @Override
-            public void onFinish() {
-                chuong.startAnimation(lacchuong);
-            }
-        }.start();
 
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,11 +86,11 @@ public class Gameduaxe extends AppCompatActivity {
                                 sb1.setThumb(getDrawable(R.drawable.goku1));
                                 sb2.setThumb(getDrawable(R.drawable.goku2));
                                 sb3.setThumb(getDrawable(R.drawable.goku3));
-                                cay1.setPadding(0,80,0,0);
-                                cay2.setPadding(0,80,0,0);
-                                cay3.setPadding(0,80,0,0);
-                                sb2.setPadding(0,50,0,0);
-                                sb3.setPadding(0,50,0,0);
+                                cay1.setPadding(0,100,0,0);
+                                cay2.setPadding(0,130,0,0);
+                                cay3.setPadding(0,100,0,0);
+                                sb2.setPadding(0,60,0,0);
+                                sb3.setPadding(0,40,0,0);
                                 cb1.setPadding(0,60,0,0);
                                 cb2.setPadding(0,60,0,0);
                                 cb3.setPadding(0,60,0,0);
@@ -118,11 +102,11 @@ public class Gameduaxe extends AppCompatActivity {
                                 sb2.setThumb(getDrawable(R.drawable.pikachu2));
                                 sb3.setThumb(getDrawable(R.drawable.pikachu3));
                                 cay1.setPadding(0,0,0,0);
-                                cay2.setPadding(0,0,0,0);
-                                cay3.setPadding(0,0,0,0);
+                                cay2.setPadding(0,30,0,0);
+                                cay3.setPadding(0,10,0,0);
                                 sb1.setPadding(0,0,0,0);
-                                sb2.setPadding(0,0,0,0);
-                                sb3.setPadding(0,0,0,0);
+                                sb2.setPadding(0,30,0,0);
+                                sb3.setPadding(0,10,0,0);
                                 x=2;
                                 break;
                         }
@@ -276,7 +260,7 @@ public class Gameduaxe extends AppCompatActivity {
                         }
                     }.start();
 
-                    CountDownTimer countDownTimer2=new CountDownTimer(15000,15000) {
+                    CountDownTimer countDownTimer2=new CountDownTimer(17000,17000) {
                         @Override
                         public void onTick(long l) {
 
@@ -340,14 +324,53 @@ public class Gameduaxe extends AppCompatActivity {
         });
     }
 
+    private void ActionBar() {
+        setSupportActionBar(toolbarGameDuaXe);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void Khaibao() {
+        toolbarGameDuaXe = findViewById(R.id.toolBarGameDuaXe);
+        textView=findViewById(R.id.textView);
+        cb1=findViewById(R.id.checkbox1);
+        cb2=findViewById(R.id.checkbox2);
+        cb3=findViewById(R.id.checkbox3);
+        sb1=findViewById(R.id.seebar1);
+        sb2=findViewById(R.id.seebar2);
+        sb3=findViewById(R.id.seebar3);
+        cay1=findViewById(R.id.cay1);
+        cay2=findViewById(R.id.cay2);
+        cay3=findViewById(R.id.cay3);
+        imb=findViewById(R.id.imagebutton);
+        reset=findViewById(R.id.change);
+        chuong=findViewById(R.id.chuong);
+        winlose=findViewById(R.id.winlose);
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
-                onBackPressed();
+                finish();
+                return true;
+            case R.id.helpDice:
+                AlertDialog.Builder alBuilder=new AlertDialog.Builder(this);
+                alBuilder.setTitle("Luật chơi");
+                alBuilder.setMessage("Trước khi bấm nút Start bạn cần chọn cược 1 trong 3 xe:" +
+                        "\n+ Nếu tổng 1 bạn chọn về đích trước thì bạn thắng" +
+                        "\n+ Và điểm của bạn sẽ được cộng 10 điểm" +
+                        "\n+ Còn lại nếu bạn thua sẽ bị trừ 10 điểm");
+                alBuilder.setIcon(R.drawable.start);
+                alBuilder.show();
                 return true;
             default:break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.help_game,menu);
+        return super.onCreateOptionsMenu(menu);
     }
     }

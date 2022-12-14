@@ -3,14 +3,15 @@ package com.example.gamevui;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -26,36 +27,23 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Dice extends AppCompatActivity {
+    Toolbar toolbarDice;
     ToggleButton button;
     ImageView ketqua;
     ImageView imageView,imageView2,imageView3;
     ArrayList<Integer> imagelist;
     CheckBox Tai,Xiu;
-    TextView thongbao;
     TextView score,phantram;
     ProgressBar detination;
     ImageView winloss,chan,le;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dice);
-        button=findViewById(R.id.button);
-        imageView=findViewById(R.id.imageView);
-        imageView2=findViewById(R.id.imageView2);
-        imageView3=findViewById(R.id.imageView3);
-        ketqua=findViewById(R.id.icon);
-        Tai=findViewById(R.id.Xiu);
-        Xiu=findViewById(R.id.Tai);
-        chan=findViewById(R.id.chan);
-        le=findViewById(R.id.le);
-        thongbao=findViewById(R.id.Thongbao);
-        score=findViewById(R.id.score);
-        phantram=findViewById(R.id.phantram);
-        winloss=findViewById(R.id.winloss);
-        detination=findViewById(R.id.results);
 
-        //back
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Khaibao();
+        ActionBar();
 
         imagelist=new ArrayList<>();
         imagelist.add(0,R.drawable.number1);
@@ -66,10 +54,10 @@ public class Dice extends AppCompatActivity {
         imagelist.add(5,R.drawable.number6);
 
         //Create Animation,Mp3
+        Animation animation_progressbar = AnimationUtils.loadAnimation(this,R.anim.animation_progressbar);
         Animation animation= AnimationUtils.loadAnimation(this,R.anim.animation_dice);
         Animation animation1=AnimationUtils.loadAnimation(this,R.anim.button_animation);
         Animation result = AnimationUtils.loadAnimation(this,R.anim.result);
-        Animation taixiu = AnimationUtils.loadAnimation(this,R.anim.taixiu);
         Animation bigtosmall=AnimationUtils.loadAnimation(this,R.anim.bigtosmall);
         Animation smalltobig=AnimationUtils.loadAnimation(this,R.anim.smalltobig);
         Animation animation_left=AnimationUtils.loadAnimation(this,R.anim.animtion_left);
@@ -83,11 +71,12 @@ public class Dice extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 button.startAnimation(animation1);
+                winloss.setVisibility(View.INVISIBLE);
                 if(detination.getProgress() == detination.getMax() || detination.getProgress() == 0){
                     detination.setProgress(50);
                     phantram.setText(50+"%");
                 }
-                if (Tai.isChecked() == false && Xiu.isChecked() == false) {
+                if (!Tai.isChecked() && !Xiu.isChecked()) {
                     AlertDialog.Builder alBuilder=new AlertDialog.Builder(Dice.this);
                     alBuilder.setTitle("Thông Báo!!");
                     alBuilder.setMessage("Bạn chưa chọn Tài Xỉu!"+"\nVui lòng chọn Tài Xỉu.");
@@ -101,8 +90,6 @@ public class Dice extends AppCompatActivity {
                     alBuilder.show();
                 } else {
                     //set INVISIBLE
-                    winloss.setVisibility(View.INVISIBLE);
-                    thongbao.setVisibility(View.INVISIBLE);
                     ketqua.setVisibility(View.INVISIBLE);
                     Tai.setVisibility(View.INVISIBLE);
                     Xiu.setVisibility(View.INVISIBLE);
@@ -113,9 +100,6 @@ public class Dice extends AppCompatActivity {
                     //set enable
                     Tai.setEnabled(false);
                     Xiu.setEnabled(false);
-
-                    //set thông báo
-                    thongbao.setText("");
 
                     //Tạo mặt xúc xắc
                     Random random = new Random();
@@ -138,9 +122,9 @@ public class Dice extends AppCompatActivity {
                         @Override
                         public void onFinish() {
                             //set animation
-                            imageView.startAnimation(taixiu);
-                            imageView2.startAnimation(taixiu);
-                            imageView3.startAnimation(taixiu);
+                            imageView.startAnimation(smalltobig);
+                            imageView2.startAnimation(smalltobig);
+                            imageView3.startAnimation(smalltobig);
 
                             //set xúc xắc
                             Drawable img = AppCompatResources.getDrawable(Dice.this, imagelist.get(number1));
@@ -166,14 +150,13 @@ public class Dice extends AppCompatActivity {
                             Xiu.setVisibility(View.VISIBLE);
                             chan.setVisibility(View.VISIBLE);
                             le.setVisibility(View.VISIBLE);
-
                             score.setText("Score: "+Tong);
                             score.startAnimation(bigtosmall);
                         }
                     }.start();
 
                     //check win,loss
-                    CountDownTimer countDownTimer2=new CountDownTimer(6000,6000) {
+                    CountDownTimer countDownTimer2=new CountDownTimer(5000,5000) {
                         @Override
                         public void onTick(long l) {
 
@@ -183,14 +166,11 @@ public class Dice extends AppCompatActivity {
                         public void onFinish() {
                             score.setText("");
                             ketqua.setVisibility(View.VISIBLE);
-                            ketqua.startAnimation(taixiu);
+                            ketqua.startAnimation(smalltobig);
 
                             if(number1 == number2 && number2 == number3){
-                                thongbao.setVisibility(View.VISIBLE);
-                                thongbao.startAnimation(result);
-                                thongbao.setText("Nhà Cái ăn!!");
-                                detination.setProgress(detination.getProgress()-10);
-                                phantram.setText(detination.getProgress()+"%");
+                                detination.startAnimation(animation_progressbar);
+                                setProgressBarReduce();
                                 ketqua.setImageResource(R.drawable.boss);
                                 loss.start();
                             }
@@ -200,8 +180,8 @@ public class Dice extends AppCompatActivity {
                                     winloss.setVisibility(View.VISIBLE);
                                     winloss.startAnimation(animation_left);
                                     ketqua.setImageResource(R.drawable.red);
-                                    detination.setProgress(detination.getProgress()+10);
-                                    phantram.setText(detination.getProgress()+"%");
+                                    detination.startAnimation(animation_progressbar);
+                                    setProgressBarIncrease();
                                     win.start();
                                 }
                                 else if(Xiu.isChecked()) {
@@ -209,8 +189,8 @@ public class Dice extends AppCompatActivity {
                                     winloss.setVisibility(View.VISIBLE);
                                     winloss.startAnimation(animation_left);
                                     ketqua.setImageResource(R.drawable.red);
-                                    detination.setProgress(detination.getProgress()-10);
-                                    phantram.setText(detination.getProgress()+"%");
+                                    detination.startAnimation(animation_progressbar);
+                                    setProgressBarReduce();
                                     loss.start();
                                 }
                             }
@@ -220,8 +200,8 @@ public class Dice extends AppCompatActivity {
                                     winloss.setVisibility(View.VISIBLE);
                                     winloss.startAnimation(animation_left);
                                     ketqua.setImageResource(R.drawable.blue);
-                                    detination.setProgress(detination.getProgress()-10);
-                                    phantram.setText(detination.getProgress()+"%");
+                                    detination.startAnimation(animation_progressbar);
+                                    setProgressBarReduce();
                                     loss.start();
                                 }
                                 else if(Xiu.isChecked()) {
@@ -229,15 +209,15 @@ public class Dice extends AppCompatActivity {
                                     winloss.setVisibility(View.VISIBLE);
                                     winloss.startAnimation(animation_left);
                                     ketqua.setImageResource(R.drawable.blue);
-                                    detination.setProgress(detination.getProgress()+10);
-                                    phantram.setText(detination.getProgress()+"%");
+                                    detination.startAnimation(animation_progressbar);
+                                    setProgressBarIncrease();
                                     win.start();
                                 }
                             }
                         }
                     }.start();
 
-                    CountDownTimer countDownTimer4=new CountDownTimer(11000,11000) {
+                    CountDownTimer countDownTimer4=new CountDownTimer(8000,8000) {
                         @Override
                         public void onTick(long l) {
 
@@ -245,12 +225,16 @@ public class Dice extends AppCompatActivity {
 
                         @Override
                         public void onFinish() {
+                            //clear animation
+                            ketqua.clearAnimation();
+                            winloss.clearAnimation();
+
                             if(detination.getProgress() == detination.getMax()){
                                 winloss.setBackgroundResource(R.drawable.congratulation);
                                 winloss.setVisibility(View.VISIBLE);
                                 winloss.startAnimation(smalltobig);
                                 win.start();
-                                CountDownTimer countDownTimer4=new CountDownTimer(12000,12000) {
+                                CountDownTimer countDownTimer4=new CountDownTimer(1000,1000) {
                                     @Override
                                     public void onTick(long l) {
 
@@ -258,11 +242,7 @@ public class Dice extends AppCompatActivity {
 
                                     @Override
                                     public void onFinish() {
-                                        button.setVisibility(View.VISIBLE);
-                                        Tai.setChecked(false);
-                                        Xiu.setChecked(false);
-                                        Tai.setEnabled(true);
-                                        Xiu.setEnabled(true);
+                                        setfinish();
                                     }
                                 }.start();
                             }else if(detination.getProgress() == 0){
@@ -270,7 +250,7 @@ public class Dice extends AppCompatActivity {
                                 winloss.setVisibility(View.VISIBLE);
                                 winloss.startAnimation(smalltobig);
                                 gameOver.start();
-                                CountDownTimer countDownTimer4=new CountDownTimer(12000,12000) {
+                                CountDownTimer countDownTimer4=new CountDownTimer(1000,1000) {
                                     @Override
                                     public void onTick(long l) {
 
@@ -278,30 +258,77 @@ public class Dice extends AppCompatActivity {
 
                                     @Override
                                     public void onFinish() {
-                                        button.setVisibility(View.VISIBLE);
-                                        Tai.setChecked(false);
-                                        Xiu.setChecked(false);
-                                        Tai.setEnabled(true);
-                                        Xiu.setEnabled(true);
+                                        setfinish();
                                     }
                                 }.start();
                             }else{
-                                button.setVisibility(View.VISIBLE);
-                                Tai.setChecked(false);
-                                Xiu.setChecked(false);
-                                Tai.setEnabled(true);
-                                Xiu.setEnabled(true);
+                                setfinish();
                             }
                         }
                     }.start();
                 }
             }
         });
+    }
 
-        //clear animation
-        thongbao.clearAnimation();
-        ketqua.clearAnimation();
-        winloss.clearAnimation();
+    private void setfinish() {
+        button.setVisibility(View.VISIBLE);
+        Tai.setChecked(false);
+        Xiu.setChecked(false);
+        Tai.setEnabled(true);
+        Xiu.setEnabled(true);
+    }
+
+    private void setProgressBarReduce() {
+        CountDownTimer countDownTimer=new CountDownTimer(2000,2000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                detination.setProgress(detination.getProgress()-10);
+                phantram.setText(detination.getProgress()+"%");
+            }
+        }.start();
+    }
+
+    private void setProgressBarIncrease() {
+        CountDownTimer countDownTimer=new CountDownTimer(2000,2000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                detination.setProgress(detination.getProgress()+10);
+                phantram.setText(detination.getProgress()+"%");
+            }
+        }.start();
+    }
+
+    private void ActionBar() {
+        setSupportActionBar(toolbarDice);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void Khaibao() {
+        button=findViewById(R.id.button);
+        imageView=findViewById(R.id.imageView);
+        imageView2=findViewById(R.id.imageView2);
+        imageView3=findViewById(R.id.imageView3);
+        ketqua=findViewById(R.id.icon);
+        Tai=findViewById(R.id.Xiu);
+        Xiu=findViewById(R.id.Tai);
+        chan=findViewById(R.id.chan);
+        le=findViewById(R.id.le);
+        score=findViewById(R.id.score);
+        phantram=findViewById(R.id.phantram);
+        winloss=findViewById(R.id.winloss);
+        detination=findViewById(R.id.results);
+        toolbarDice=findViewById(R.id.toolBarDice);
     }
 
     private void Check(){
@@ -328,10 +355,26 @@ public class Dice extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
-                onBackPressed();
+                finish();
+                return true;
+            case R.id.helpDice:
+                AlertDialog.Builder alBuilder=new AlertDialog.Builder(this);
+                alBuilder.setTitle("Luật chơi");
+                alBuilder.setMessage("Trước khi bấm nút Start bạn cần chọn ô tài hoặc xỉu:" +
+                        "\n+ Nếu 3 mặt xúc xắc bằng nhau thì chủ phòng thắng,bạn thua" +
+                        "\n+ Nếu tổng 3 xúc xắc là chẵn thì Tài thắng" +
+                        "\n+ Còn lại thì Xỉu thắng");
+                alBuilder.setIcon(R.drawable.icon);
+                alBuilder.show();
                 return true;
             default:break;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.help_game,menu);
+        return super.onCreateOptionsMenu(menu);
     }
+}

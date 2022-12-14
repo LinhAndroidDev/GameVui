@@ -2,10 +2,12 @@ package com.example.gamevui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
-import android.content.Intent;
+import android.app.AlertDialog;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -15,9 +17,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Caro extends AppCompatActivity {
+    Toolbar toolbarCaro;
     ImageButton playagain;
     ImageView icon;
-    TextView player;
     TextView result;
     ImageView imageView;
     int[] gamestate = {2, 2, 2, 2, 2, 2, 2, 2, 2};
@@ -31,12 +33,16 @@ public class Caro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_caro);
 
-        //back
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         Khaibao();
+        ActionBar();
+
         playagain.setVisibility(View.INVISIBLE);
         icon.setVisibility(View.INVISIBLE);
+    }
+
+    private void ActionBar() {
+        setSupportActionBar(toolbarCaro);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void Khaibao() {
@@ -50,17 +56,15 @@ public class Caro extends AppCompatActivity {
         img7 = findViewById(R.id.img7);
         img8 = findViewById(R.id.img8);
         img9 = findViewById(R.id.img9);
-        player = findViewById(R.id.player);
         result = findViewById(R.id.result);
         playagain = findViewById(R.id.playagain);
+        toolbarCaro = findViewById(R.id.toolBarCaro);
     }
 
     public void dropIn(View view) {
         //Khai báo Animation and Media
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.animation_caro);
-        Animation translateLeft = AnimationUtils.loadAnimation(this, R.anim.translate_left);
         Animation translateRight = AnimationUtils.loadAnimation(this,R.anim.translate_right);
-        Animation translateEqual = AnimationUtils.loadAnimation(this,R.anim.equal);
         MediaPlayer victory = MediaPlayer.create(this, R.raw.caro);
         MediaPlayer equal = MediaPlayer.create(this, R.raw.lose_caro);
         MediaPlayer tiengCo=MediaPlayer.create(this,R.raw.game_caro);
@@ -96,8 +100,6 @@ public class Caro extends AppCompatActivity {
                     //Appear
                     playagain.setVisibility(View.VISIBLE);
                     playagain.setAnimation(animation);
-                    player.setVisibility(View.VISIBLE);
-                    player.setAnimation(translateLeft);
                     result.setVisibility(View.VISIBLE);
                     result.setAnimation(translateRight);
                     icon.setVisibility(View.VISIBLE);
@@ -108,14 +110,10 @@ public class Caro extends AppCompatActivity {
                     //find player win
                     gameActive = false;
                     if (nguoichoi == 0) {
-                        player.setText("O");
-                        player.setTextColor(getResources().getColor(R.color.red));
-                        result.setText("win!");
+                        result.setText("O win!");
                         result.setTextColor(getResources().getColor(R.color.red));
                     } else {
-                        player.setText("X");
-                        player.setTextColor(getResources().getColor(R.color.green));
-                        result.setText("win!");
+                        result.setText("X win!");
                         result.setTextColor(getResources().getColor(R.color.green));
                     }
                 } else {
@@ -126,16 +124,12 @@ public class Caro extends AppCompatActivity {
                         //Appear
                         playagain.setVisibility(View.VISIBLE);
                         playagain.setAnimation(animation);
-                        player.setVisibility(View.VISIBLE);
-                        player.setAnimation(translateLeft);
                         result.setVisibility(View.VISIBLE);
                         icon.setVisibility(View.VISIBLE);
                         icon.setAnimation(animation);
 
                         //results
-                        player.setTextColor(getResources().getColor(R.color.black));
-                        player.setText("Equal!!");
-                        result.setText("");
+                        result.setText("Hoà");
                         icon.setBackgroundResource(R.drawable.equal);
                         equal.start();
                     }
@@ -147,9 +141,7 @@ public class Caro extends AppCompatActivity {
         playagain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                player.setText("Game");
-                player.setTextColor(getResources().getColor(R.color.black));
-                result.setText("Caro");
+                result.setText("Game Caro");
                 result.setVisibility(View.VISIBLE);
                 result.setTextColor(getResources().getColor(R.color.black));
                 playagain.clearAnimation();
@@ -190,10 +182,24 @@ public class Caro extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
-                onBackPressed();
+                finish();
+                return true;
+            case R.id.helpDice:
+                AlertDialog.Builder alBuilder=new AlertDialog.Builder(this);
+                alBuilder.setTitle("Luật chơi");
+                alBuilder.setMessage("2 người chơi lần lượt đánh X và O vào các ô" +
+                        "\n+ Nếu X hoặc O đạt được 3 ô thẳng hàng nhau (ngang,chéo,dọc) thì thắng");
+                alBuilder.setIcon(R.drawable.caro);
+                alBuilder.show();
                 return true;
             default:break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.help_game,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }
