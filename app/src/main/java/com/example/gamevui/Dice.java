@@ -57,7 +57,6 @@ public class Dice extends AppCompatActivity {
         Animation animation_progressbar = AnimationUtils.loadAnimation(this,R.anim.animation_progressbar);
         Animation animation= AnimationUtils.loadAnimation(this,R.anim.animation_dice);
         Animation animation1=AnimationUtils.loadAnimation(this,R.anim.button_animation);
-        Animation result = AnimationUtils.loadAnimation(this,R.anim.result);
         Animation bigtosmall=AnimationUtils.loadAnimation(this,R.anim.bigtosmall);
         Animation smalltobig=AnimationUtils.loadAnimation(this,R.anim.smalltobig);
         Animation animation_left=AnimationUtils.loadAnimation(this,R.anim.animtion_left);

@@ -357,7 +357,7 @@ public class Gameduaxe extends AppCompatActivity {
                 AlertDialog.Builder alBuilder=new AlertDialog.Builder(this);
                 alBuilder.setTitle("Luật chơi");
                 alBuilder.setMessage("Trước khi bấm nút Start bạn cần chọn cược 1 trong 3 xe:" +
-                        "\n+ Nếu tổng 1 bạn chọn về đích trước thì bạn thắng" +
+                        "\n+ Nếu xe bạn chọn về đích trước thì bạn thắng" +
                         "\n+ Và điểm của bạn sẽ được cộng 10 điểm" +
                         "\n+ Còn lại nếu bạn thua sẽ bị trừ 10 điểm");
                 alBuilder.setIcon(R.drawable.start);
