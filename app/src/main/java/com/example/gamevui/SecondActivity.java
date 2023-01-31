@@ -8,6 +8,8 @@ import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -17,6 +19,7 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setWinDow();
         setContentView(R.layout.activity_second);
 
         iconCaro = findViewById(R.id.iconCaro);
@@ -63,5 +66,11 @@ public class SecondActivity extends AppCompatActivity {
                 startActivity(intentRace);
             }
         });
+    }
+
+    private void setWinDow() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 }

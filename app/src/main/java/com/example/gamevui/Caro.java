@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
@@ -31,6 +33,7 @@ public class Caro extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setWinDow();
         setContentView(R.layout.activity_caro);
 
         Khaibao();
@@ -38,6 +41,12 @@ public class Caro extends AppCompatActivity {
 
         playagain.setVisibility(View.INVISIBLE);
         icon.setVisibility(View.INVISIBLE);
+    }
+
+    private void setWinDow() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     private void ActionBar() {

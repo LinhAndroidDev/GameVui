@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -17,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setWinDow();
         setContentView(R.layout.activity_main);
 
         vaoGamevui=findViewById(R.id.Vaogamevui);
@@ -45,5 +48,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }.start();
+    }
+
+    private void setWinDow() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

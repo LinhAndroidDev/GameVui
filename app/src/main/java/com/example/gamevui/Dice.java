@@ -14,6 +14,8 @@ import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
@@ -40,6 +42,7 @@ public class Dice extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setWinDow();
         setContentView(R.layout.activity_dice);
 
         Khaibao();
@@ -268,6 +271,12 @@ public class Dice extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void setWinDow() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     private void setfinish() {

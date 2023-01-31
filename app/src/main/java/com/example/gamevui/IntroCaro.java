@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -16,6 +18,7 @@ public class IntroCaro extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setWinDow();
         setContentView(R.layout.activity_intro_caro);
 
         phanTramCaro=findViewById(R.id.phanTramCaro);
@@ -45,5 +48,15 @@ public class IntroCaro extends AppCompatActivity {
 
             }
         }.start();
+    }
+
+    private void setWinDow() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

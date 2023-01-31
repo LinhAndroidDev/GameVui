@@ -2,17 +2,23 @@ package com.example.gamevui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
@@ -44,9 +50,11 @@ public class Gameduaxe extends AppCompatActivity {
         super.onResume();
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setWinDow();
         setContentView(R.layout.activity_gameduaxe);
 
         Khaibao();
@@ -65,6 +73,9 @@ public class Gameduaxe extends AppCompatActivity {
             public void onClick(View view) {
                 popupMenu=new PopupMenu(Gameduaxe.this,reset);
                 popupMenu.getMenuInflater().inflate(R.menu.reset,popupMenu.getMenu());
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    popupMenu.setForceShowIcon(true);
+                }
                 popupMenu.show();
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
@@ -324,6 +335,11 @@ public class Gameduaxe extends AppCompatActivity {
         });
     }
 
+    private void setWinDow() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
     private void ActionBar() {
         setSupportActionBar(toolbarGameDuaXe);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -373,4 +389,4 @@ public class Gameduaxe extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.help_game,menu);
         return super.onCreateOptionsMenu(menu);
     }
-    }
+}
